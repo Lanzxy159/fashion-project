@@ -57,3 +57,64 @@ featureCards.forEach(card => {
     });
 });
 
+
+
+
+
+// Modal Start
+
+const loginBtn = document.getElementById('loginBtn');
+const modal = document.getElementById('loginModal');
+const closeBtn = document.getElementById('closeModal');
+
+const tabs = document.querySelectorAll('.tab');
+const forms = document.querySelectorAll('.form');
+
+// Open modal (Login button)
+loginBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal.style.display = 'flex';
+});
+
+// Close modal
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// Tab switching
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        forms.forEach(f => f.classList.remove('active'));
+
+        const selected = tab.getAttribute('data-tab');
+        document.getElementById(selected + 'Form').classList.add('active');
+    });
+});
+
+
+// CTA (Signup button)
+const signupBtn = document.getElementById('signupBtn');
+
+signupBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    // open modal
+    modal.style.display = 'flex';
+
+    // switch to signup tab
+    tabs.forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-tab="signup"]').classList.add('active');
+
+    forms.forEach(f => f.classList.remove('active'));
+    document.getElementById('signupForm').classList.add('active');
+});
